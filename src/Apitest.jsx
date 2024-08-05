@@ -9,7 +9,7 @@ export default function ApiTest() {
         setLoading(true);
         try {
             let imagesArray = [];
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < 10; i++) {
                 const response = await axios.get("https://api.thecatapi.com/v1/images/search");
                 imagesArray.push(response.data[0].url);
             }
@@ -57,7 +57,7 @@ export default function ApiTest() {
             <style>{shimmerStyle}</style> {/* Inject the keyframes for shimmer effect */}
             {loading ? (
                 <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "20px" }}>
-                    {Array(5).fill(0).map((_, index) => (
+                    {Array(10).fill(0).map((_, index) => (
                         <div
                             key={index}
                             style={skeletonStyle} // Apply inline styles

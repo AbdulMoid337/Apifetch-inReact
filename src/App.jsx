@@ -1,11 +1,10 @@
-import ApiTest from './Apitest'
-
 import './App.css'
+import Joker from './Joker'
 
 function App() {
   return (
     <>
-<ApiTest />
+    <Joker />
     </>
   )
 }

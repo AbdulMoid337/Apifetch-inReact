@@ -6,18 +6,18 @@ export default function ApiTest() {
     const [loading, setLoading] = useState(true);
 
     const fetchImages = async () => {
-        setLoading(true); // Start loading
+        setLoading(true);
         try {
             let imagesArray = [];
             for (let i = 0; i < 10; i++) {
-                const response = await axios.get("https://dog.ceo/api/breeds/image/random");
-                imagesArray.push(response.data.message);
+                const response = await axios.get("https://api.thecatapi.com/v1/images/search");
+                imagesArray.push(response.data[0].url);
             }
             setImages(imagesArray);
         } catch (error) {
-            console.error("No data");
+            console.error("Error fetching data:", error);
         } finally {
-            setLoading(false); // Stop loading
+            setLoading(false);
         }
     };
 
@@ -27,9 +27,9 @@ export default function ApiTest() {
 
     return (
         <div style={{ textAlign: "center", padding: "20px" }}>
-            <h3>Random Images API</h3>
+            <h3>Random Cat Images API</h3>
             {loading ? (
-                <div style={{ fontSize: "24px", color: "#007BFF" }}>Loading...</div>
+                <p style={{ fontSize: "24px", color: "#007BFF" }}>Loading...</p>
             ) : (
                 <>
                     <button
@@ -52,7 +52,7 @@ export default function ApiTest() {
                             <img
                                 src={image}
                                 key={index}
-                                alt="Random Dog"
+                                alt="Random Cat"
                                 style={{
                                     width: "200px",
                                     height: "200px",

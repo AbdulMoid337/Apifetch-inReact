@@ -9,7 +9,7 @@ export default function ApiTest() {
         setLoading(true);
         try {
             let imagesArray = [];
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 5; i++) {
                 const response = await axios.get("https://api.thecatapi.com/v1/images/search");
                 imagesArray.push(response.data[0].url);
             }
@@ -25,11 +25,45 @@ export default function ApiTest() {
         fetchImages();
     }, []);
 
+    // Define inline styles for skeleton loader
+    const skeletonStyle = {
+        width: "200px",
+        height: "200px",
+        borderRadius: "10px",
+        background: "linear-gradient(to right, #3c3c3c 8%, #2c2c2c 38%, #3c3c3c 54%)",
+        backgroundSize: "1000px 100%",
+        animation: "shimmer 1.5s infinite",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        margin: "10px",
+        position: "relative",
+    };
+    
+    
+    // Define keyframes for shimmer effect
+    const shimmerStyle = `
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+    `;
+
     return (
         <div style={{ textAlign: "center", padding: "20px" }}>
             <h3>Random Cat Images API</h3>
+            <style>{shimmerStyle}</style> {/* Inject the keyframes for shimmer effect */}
             {loading ? (
-                <p style={{ fontSize: "24px", color: "#007BFF" }}>Loading...</p>
+                <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "20px" }}>
+                    {Array(5).fill(0).map((_, index) => (
+                        <div
+                            key={index}
+                            style={skeletonStyle} // Apply inline styles
+                        ></div>
+                    ))}
+                </div>
             ) : (
                 <>
                     <button

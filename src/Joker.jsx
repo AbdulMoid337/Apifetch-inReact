@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function Joker() {
-  const [joke, setJoke] = useState({ setup: "", punchline: "" });
+  const [joke, setJoke] = useState({ setup: "", punchline: "" , type : "" });
   const [loading, setLoading] = useState(true);
 
   const URL = "https://official-joke-api.appspot.com/random_joke";
@@ -25,7 +25,7 @@ function Joker() {
 
   return (
     <div style={{ textAlign: "center", padding: "20px" }}>
-      <h2>Here is The Random Joke</h2>
+      <h2>Here is The {joke.type} Joke</h2>
       <button
         onClick={getJokes}
         style={{
